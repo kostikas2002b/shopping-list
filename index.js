@@ -1,11 +1,66 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js'
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js'
 import { getDatabase, ref, push, onValue, remove } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js'
 
 const appSettings = {
-    databaseURL: 'https://shopping-list-sofeiri-default-rtdb.europe-west1.firebasedatabase.app/'
-}
+    
+    apiKey: "AIzaSyByzI2Gv_m5PSXwbjuKLUPA749QgyI9Uo4",
+    
+    // authDomain: "PROJECT_ID.firebaseapp.com",
+    
+    // The value of `databaseURL` depends on the location of the database
+    databaseURL: 'https://shopping-list-sofeiri-default-rtdb.europe-west1.firebasedatabase.app/',
+    
+    // projectId: "PROJECT_ID",
+    
+    // appId: "APP_ID",
+    
+    // // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
+    // measurementId: "G-MEASUREMENT_ID",
+};
 
 const app = initializeApp(appSettings);
+window.app = app;
+
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    console.log('signed in');
+    const uid = user.uid;
+    // ...
+  } else {
+    // User is signed out
+    // ...
+    console.log('signed out');
+  }
+});
+
+// const testEmail = 'YOUR_EMAIL_HERE';
+// const testPassword = 'YOUR_PASSWORD_HERE';
+// signInWithEmailAndPassword(auth, testEmail, testPassword)
+//   .then((userCredential) => {
+//     // Signed in 
+//     const user = userCredential.user;
+//     console.log('successful sign-in!');
+//     // ...
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     console.log('UNsuccessful...');
+//   });
+
+// signOut(auth).then(() => {
+//     // Sign-out successful.
+//     console.log('Sign-out successful.');
+//   }).catch((error) => {
+//     // An error happened.
+//     console.log('An error happened during Sign-out');
+//   });
+
 const database = getDatabase(app);
 const shoppingListInDB = ref(database, 'shoppingList');
 
@@ -40,12 +95,12 @@ onValue(shoppingListInDB, function (snapshot) {
     }
 });
 
-function clearShoppingListEl() {
-    shoppingListEl.innerHTML = '';
-}
-
 function clearInputFieldEl() {
     inputFieldEl.value = '';
+}
+
+function clearShoppingListEl() {
+    shoppingListEl.innerHTML = '';
 }
 
 function appendItemToShoppingListEl(item) {
