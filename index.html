@@ -13,17 +13,51 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
 </head>
 <body>
-    <div class="container">
-        <img src="assets/peach-and-goma-cat-cart.jpg" alt="cute-cats-shopping">
-        <!-- <img src="assets/cat-shopping-cart.jpg" alt="cute-cat-shopping"> -->
-        <form action="#">
-            <input type="text" id="input-field" placeholder="e.g. Nutella...">
-            <button type="submit" id="add-button">Add</button>
-        </form>
-        <ul id="shopping-list"></ul>
+
+    <div class="total-container">
+    
+        <div class="outer-container">
+    
+            <div id="sign-in-page-view" class="inner-container hidden">
+                <img src="assets/peach-and-goma-cat-cart.jpg" alt="cute-cats-shopping">
+                <!-- <img src="assets/cat-shopping-cart.jpg" alt="cute-cat-shopping"> -->
+                <form action="#">
+                    <input type="text" id="email-input-field" placeholder="email">
+                    <input type="password" id="password-input-field" placeholder="password">
+                    <button type="submit" id="sign-in-button">Sign-In</button>
+                </form>
+            </div>
+        
+            <div id="list-page-view" class="inner-container hidden">
+                <img src="assets/peach-and-goma-cat-cart.jpg" alt="cute-cats-shopping">
+                <!-- <img src="assets/cat-shopping-cart.jpg" alt="cute-cat-shopping"> -->
+                <div id="sign-out-button-div">
+                    <form action="#" style="background-color: white; color: #432000; text-align: end; font-size: 10px;">
+                        Signed in as 
+                        <span id="username"></span>
+                        <br>
+                        <button type="submit" id="sign-out-button" style="background-color: white; color: #432000; text-align: end; text-decoration: underline;">
+                            (Sign Out)
+                        </button>
+                    </form>
+                </div>
+                <form action="#">
+                    <input type="text" id="input-field" placeholder="e.g. Nutella...">
+                    <button type="submit" id="add-button">Add</button>
+                </form>
+                <ul id="shopping-list"></ul>
+            </div>
+            
+        </div>
+
     </div>
+
     <script src="index.js" type="module"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
+
 </body>
 </html>

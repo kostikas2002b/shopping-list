@@ -8,7 +8,11 @@ body {
     user-select: none;
 }
 
-.container {
+.total-container {
+    overflow-x: hidden;
+}
+
+.outer-container {
     display: flex;
     flex-direction: column;
     max-width: 320px;
@@ -16,9 +20,22 @@ body {
     margin: 0px auto;
 }
 
+.inner-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden {
+    display: none;
+}
+
 img {
     width: 200px;
     margin: 0 auto;
+}
+
+#email-input-field {
+    margin-bottom: 0;
 }
 
 input {
@@ -49,6 +66,21 @@ button {
 button:hover {
     background-color: #432000;
     cursor: pointer;
+}
+
+#list-page-view {
+    position: relative;
+}
+
+#sign-out-button-div {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#sign-out-button-div button {
+    padding: 0px;
+    font-size: 10px;
 }
 
 ul {
