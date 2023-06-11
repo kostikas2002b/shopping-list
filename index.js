@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js'
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js'
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js'
 import { getDatabase, ref, push, get, onValue, remove } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js'
 
 const appSettings = {
@@ -31,6 +31,8 @@ const listPageViewEl = document.getElementById('list-page-view');
 const emailInputFieldEl = document.getElementById('email-input-field');
 const passwordInputFieldEl = document.getElementById('password-input-field');
 const signInButtonEl = document.getElementById('sign-in-button');
+const resetPasswordLinkEl = document.getElementById('reset-password-link');
+const resetPasswordSentEl = document.getElementById('reset-password-sent');
 
 const signOutButtonEl = document.getElementById('sign-out-button');
 
@@ -114,6 +116,8 @@ signInButtonEl.addEventListener('click', function(event) {
                 const user = userCredential.user;
                 emailInputFieldEl.value = '';
                 passwordInputFieldEl.value = '';
+                resetPasswordLinkEl.style.display = 'block';
+                resetPasswordSentEl.style.display = 'none';
                 console.log('successful sign-in!');
                 // ...
             })
@@ -121,6 +125,23 @@ signInButtonEl.addEventListener('click', function(event) {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log('sign-in UNsuccessful...');
+            })
+        );
+    }
+});
+
+resetPasswordLinkEl.addEventListener('click', function(event) {
+    event.preventDefault();
+    const inputEmail = emailInputFieldEl.value;
+    if (inputEmail) {
+        (sendPasswordResetEmail(auth, inputEmail)
+            .then(() => {
+                console.log('email sent!');
+                resetPasswordLinkEl.style.display = 'none';
+                resetPasswordSentEl.style.display = 'block';
+            })
+            .catch((error) => {
+                console.log(error);
             })
         );
     }
