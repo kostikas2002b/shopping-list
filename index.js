@@ -144,12 +144,11 @@ signOutButtonEl.addEventListener('click', function(event) {
 
 addButtonEl.addEventListener('click', function (event) {
     event.preventDefault();
-    
     let inputValue = inputFieldEl.value;
-
-    push(shoppingListInDB, inputValue);
-
-    clearInputFieldEl();
+    if (inputValue) {
+        push(shoppingListInDB, inputValue);
+        clearInputFieldEl();
+    }
 });
 
 document.addEventListener('mouseup', potentiallyRemoveListItem);
@@ -200,11 +199,10 @@ function appendItemToShoppingListEl(item) {
     newEl.textContent = itemValue;
     
     // newEl.addEventListener('click', function () {
-        //     let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`);
-        //     remove(exactLocationOfItemInDB);
-        // });
-        
-
+    //     let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`);
+    //     remove(exactLocationOfItemInDB);
+    // });
+    
     let containerEl = document.createElement('div');
     
     containerEl.innerHTML = `<!-- Swiper -->
