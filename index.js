@@ -1,29 +1,29 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js'
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js'
-import { getDatabase, ref, push, get, onValue, remove } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js'
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+import { getDatabase, ref, push, get, onValue, remove } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js';
 
-const appSettings = {
-    
+// Your web app's Firebase configuration
+const firebaseConfig = {
     apiKey: "AIzaSyByzI2Gv_m5PSXwbjuKLUPA749QgyI9Uo4",
-    
-    // authDomain: "PROJECT_ID.firebaseapp.com",
-    
-    // The value of `databaseURL` depends on the location of the database
-    databaseURL: 'https://shopping-list-sofeiri-default-rtdb.europe-west1.firebasedatabase.app/',
-    
-    // projectId: "PROJECT_ID",
-    
-    // appId: "APP_ID",
-    
-    // // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
-    // measurementId: "G-MEASUREMENT_ID",
+    authDomain: "shopping-list-sofeiri.firebaseapp.com",
+    databaseURL: "https://shopping-list-sofeiri-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "shopping-list-sofeiri",
+    storageBucket: "shopping-list-sofeiri.appspot.com",
+    messagingSenderId: "375194867856",
+    appId: "1:375194867856:web:fc90e16ab1672951cba015"
 };
 
-const app = initializeApp(appSettings);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 window.app = app;
 
 const auth = getAuth(app);
 window.auth = auth;
+
+const database = getDatabase(app);
 
 const signInPageViewEl = document.getElementById('sign-in-page-view');
 const listPageViewEl = document.getElementById('list-page-view');
@@ -31,6 +31,7 @@ const listPageViewEl = document.getElementById('list-page-view');
 const emailInputFieldEl = document.getElementById('email-input-field');
 const passwordInputFieldEl = document.getElementById('password-input-field');
 const signInButtonEl = document.getElementById('sign-in-button');
+
 const resetPasswordLinkEl = document.getElementById('reset-password-link');
 const resetPasswordSentEl = document.getElementById('reset-password-sent');
 
@@ -38,12 +39,11 @@ const signOutButtonEl = document.getElementById('sign-out-button');
 
 const inputFieldEl = document.getElementById('input-field');
 const addButtonEl = document.getElementById('add-button');
+
 const shoppingListEl = document.getElementById('shopping-list');
 
 let mousedownedLi = null;
 
-
-const database = getDatabase(app);
 let usersShoppingListInDB;
 let usersShoppingListInDBValue;
 let shoppingListInDB;
